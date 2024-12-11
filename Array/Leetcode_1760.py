@@ -40,7 +40,8 @@
 # 1 <= nums.length <= 105
 # 1 <= maxOperations, nums[i] <= 109
 from math import ceil
-import List
+from typing import List
+
 class Solution:
     def minimumSize(self, nums: List[int], maxOperations: int) -> int:
         def can_divide(max_balls):
