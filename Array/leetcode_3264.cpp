@@ -75,7 +75,7 @@ public:
             pq.pop();
             int val = temp.first;
             int ind = temp.second;
-            n=result[ind]= val;
+            result[ind]= val;
         }
         return result;
     }
