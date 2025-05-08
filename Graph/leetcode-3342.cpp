@@ -30,8 +30,10 @@ public:
                 int j_ = dir[1]+j;
 
                 if(i_>=0 && i_<m && j_>=0 && j_<n){
+                    int step = (i_ + j_) % 2==0? 2: 1;
                     int wait = max(moveTime[i_][j_] -  time, 0);
-                    int finaltime = time+ wait +1;
+
+                    int finaltime = time+ wait +step;
 
                     if(result[i_][j_] > finaltime){
                         result[i_][j_] = finaltime;
