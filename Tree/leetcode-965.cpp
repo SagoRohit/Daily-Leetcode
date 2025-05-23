@@ -19,10 +19,12 @@ public:
     bool inorder(TreeNode* root, int val){
         if(!root)
             return true;
+            //checking if the left node is equal to val or not, if not then returns false and eventually return false
         if(!(inorder(root->left, val)))
             return false;
         if(root->val!=val)
             return false;
+        // now traversing to right subtree
         return inorder(root->right, val);
     }
 };
