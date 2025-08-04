@@ -1,5 +1,6 @@
 select customer_number 
 from orders
 group by customer_number 
-having count(order_number)>1
+order by count(*) desc
+limit 1
 ;
