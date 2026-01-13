@@ -1,0 +1,66 @@
+1. Show the total amount of male patients and the total amount of female patients in the patients table.
+Display the two results in the same row.
+Solution 1:
+    select (select count(*)
+             from patients
+             where gender='M') as male_count,
+       (select count(*)
+             from patients
+             where gender='F') as female_count;
+Solution 2:
+    select 
+	sum(gender='M') as male_count,
+    sum(gender='F') as femle_count
+from patients
+
+2. Show first and last name, allergies from patients which have allergies to either 'Penicillin' or 'Morphine'. Show results ordered ascending by allergies then by first_name then by last_name.
+Solution 1:
+    select first_name, last_name, allergies
+from patients
+where allergies= 'Penicillin' or allergies='Morphine'
+order by allergies asc, first_name asc ,last_name asc
+
+Solution 2:
+    select first_name, last_name, allergies
+from patients
+where allergies In (' Penicillin', 'Morphine')
+order by allergies asc, first_name asc ,last_name asc
+
+3. Show patient_id, diagnosis from admissions. Find patients admitted multiple times for the same diagnosis.
+Solution 1:
+    SELECT patient_id, diagnosis
+FROM admissions
+GROUP BY patient_id, diagnosis
+HAVING COUNT(*) > 1;
+
+4. Show the city and the total number of patients in the city.
+Order from most to least patients and then by city name ascending.
+Solution 1:
+select city, count(first_name) as num_patients
+from patients
+group by city
+order by count(first_name) desc, city asc
+
+5. Show first name, last name and role of every person that is either patient or doctor.
+The roles are either "Patient" or "Doctor"
+Solution 1: 
+    select first_name, last_name, 'patient' as role
+from patients
+union all
+select first_name, last_name, 'Doctor' as role
+from doctors
+
+6. Show all allergies ordered by popularity. Remove NULL values from query.
+Solution 1: 
+    select allergies, count(*) as total_diagnosis
+from patients
+where allergies is not null
+group by allergies
+order by total_diagnosis desc
+
+7. Show all patient's first_name, last_name, and birth_date who were born in the 1970s decade. Sort the list starting from the earliest birth_date.
+Solution 1: 
+    select first_name, last_name, birth_date
+from patients
+where year(birth_date)>=1970 and year(birth_date)<1980
+order by birth_date asc
