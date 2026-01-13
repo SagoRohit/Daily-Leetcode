@@ -91,3 +91,11 @@ Solution 1.
 from admissions
 group by day(admission_date)
 order by number_of_admission desc
+
+11. Show all columns for patient_id 542's most recent admission_date.
+Solution 1:
+    select *
+from admissions
+where patient_id=542
+group by patient_id 
+having admission_date= max(admission_date)
