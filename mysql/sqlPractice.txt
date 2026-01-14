@@ -166,3 +166,18 @@ from
 	(select admission_date, count(*) as number_of_visits
      from admissions
      group by admission_date)
+
+18.Display every patient that has at least one admission and show their most recent admission along with the patient and doctor's full name.
+Solution 1.
+    select
+  p.first_name || ' ' || p.last_name as patient_name,
+  a.admission_date,
+  d.first_name || ' ' || d.last_name as doctors_name
+from patients p
+  join admissions a on p.patient_id = a.patient_id
+  join doctors d on a.attending_doctor_id = d.doctor_id
+where a.admission_date = (
+    select max(a2.admission_date)
+    from admissions a2
+    where a2.patient_id = p.patient_id
+  )
