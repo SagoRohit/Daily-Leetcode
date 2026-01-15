@@ -195,3 +195,52 @@ Solution 1:
 from patients
 group by weight_group
 order by weight_group desc
+
+20. Show patient_id, weight, height, isObese from the patients table.
+
+Display isObese as a boolean 0 or 1.
+
+Obese is defined as weight(kg)/(height(m)2) >= 30.
+
+weight is in units kg.
+
+height is in units cm.
+
+Solution 1: SELECT
+  patient_id,
+  weight,
+  height,
+  (
+    CASE
+      WHEN weight / (POWER(height / 100.0, 2)) >= 30 THEN 1
+      ELSE 0
+    END
+  ) AS isObese
+FROM patients;
+
+21. Show patient_id, first_name, last_name, and attending doctor's specialty.
+Show only the patients who has a diagnosis as 'Epilepsy' and the doctor's first name is 'Lisa'
+
+Check patients, admissions, and doctors tables for required information.
+Solution 1. select
+  p.patient_id,
+  p.first_name,
+  p.last_name,
+  d.specialty
+from patients p
+  join admissions a on p.patient_id = a.patient_id
+  join doctors d on a.attending_doctor_id = d.doctor_id
+where p.patient_id in (
+    select a2.patient_id
+    from
+      admissions a2
+    where
+      a2.diagnosis = 'Epilepsy'
+  )
+  and a.attending_doctor_id in (
+    select d2.doctor_id
+    from
+      doctors d2
+    where
+      d2.first_name = 'Lisa'
+  )
