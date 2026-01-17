@@ -275,3 +275,42 @@ Solution 1: select
   ) as cost_after_insurance
 from admissions
 group by has_insurance
+
+
+24. Show the provinces that has more patients identified as 'M' than 'F'. Must only show full province_name
+Solution 1: select province_name
+from province_names
+where province_id in (select province_id
+                      from patients
+                      group by province_id
+                      having sum(gender='M') > sum (gender='F'));
+
+
+Solution 2:
+select p.province_name
+from province_names p
+  join patients pr on p.province_id = pr.province_id
+group by p.province_name
+having
+  count(
+    case
+      when gender = 'M' 1
+    end
+  ) > count(
+    case
+      when gender = 'F' 1
+    end
+  )
+
+  25. Show how much money the company lost due to giving discounts each year, order the years from most recent to least recent. Round to 2 decimal places
+  Solution 1: select
+  year(o.order_date) as order_year,
+  round(
+    sum(od.quantity * p.unit_price * od.discount),
+    2
+  ) as discount_amount
+from order_details as od
+  join orders o on od.order_id = o.order_id
+  join products p on od.product_id = p.product_id
+group by order_year
+order by order_year desc
