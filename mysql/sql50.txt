@@ -74,3 +74,19 @@ round(
 ) as processing_time
 from activity
 group by machine_id
+
+577.
+select e.name, b.bonus
+from employee e left join
+bonus b on 
+e.empId=b.empId
+where b.bonus is null or
+b.bonus < 1000
+
+1280. 
+select st.student_id, st.student_name, su.subject_name, count(e.student_id) as attended_exams
+from students st cross join subjects su left join examinations e
+on st.student_id=e.student_id
+and su.subject_name=e.subject_name
+group by st.student_id,st.student_name, su.subject_name
+order by st.student_id,st.student_name, su.subject_name
