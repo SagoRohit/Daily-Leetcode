@@ -28,3 +28,15 @@ where length(content)>15
 select eu.unique_id, e.name
 from employees e left join   employeeUNI eu on
 eu.id= e.id
+
+1068. 
+select p.product_name, s.year, s.price
+from sales s join product p 
+on s.product_id=p.product_id
+
+1581. 
+select v.customer_id, count(*) as count_no_trans 
+from visits v left join transactions t 
+on v.visit_id=t.visit_id
+where t.transaction_id is null
+group by v.customer_id
