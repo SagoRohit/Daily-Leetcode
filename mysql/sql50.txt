@@ -40,3 +40,37 @@ from visits v left join transactions t
 on v.visit_id=t.visit_id
 where t.transaction_id is null
 group by v.customer_id
+
+197.
+select w1.id as Id
+from weather w1, weather w2
+where datediff(w1.recordDate, w2.recordDate)=1 and 
+w1.temperature > w2.temperature
+
+1661.
+select a.machine_id,  
+round(
+    (
+        select avg(a1.timestamp) 
+        from activity a1
+        where a1.activity_type = 'end' and
+        a1.machine_id=a.machine_id
+    ) -
+    (
+        select avg(a1.timestamp)
+        from activity a1
+        where a1.activity_type='start' and
+        a1.machine_id=a.machine_id
+    ),3
+) as processing_time 
+from activity a
+group by a.machine_id
+
+solution 2: 
+select machine_id,
+round(
+    avg(case when activity_type='end' then timestamp end)-
+    avg(case when activity_type='start' then timestamp end),3
+) as processing_time
+from activity
+group by machine_id
