@@ -112,3 +112,21 @@ select p.project_id,
     from project p join employee e
     on p.employee_id=e.employee_id
     group by p.project_id
+
+1633.
+select c.contest_id, round(count(c.contest_id)/(select count(*)
+                                                from users)*100.00,2) as percentage 
+from register c
+group by c.contest_id
+order by percentage desc, c.contest_id asc
+
+1211.
+SELECT 
+    query_name,
+    ROUND(sum(rating/  position)/count(*), 2) AS quality,
+    ROUND(
+        (SUM(CASE WHEN rating < 3 THEN 1 ELSE 0 END) / COUNT(*))*100.00,
+        2
+    ) AS poor_query_percentage
+FROM queries
+GROUP BY query_name;
