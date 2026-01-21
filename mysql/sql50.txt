@@ -145,3 +145,24 @@ WHERE DATE(activity_date) BETWEEN '2019-06-28' AND '2019-07-27'
 GROUP BY DATE(activity_date)
 ORDER BY day;
 
+596.
+select class
+from courses
+group by class
+having count(student)>=5
+
+610.
+select x,y,z,
+(case when x+y>z and y+z>x and z+x>y then 'Yes'
+else 'No' end) as triangle
+from triangle
+
+619.
+select max(num) as num
+from 
+(
+    select num
+    from MyNumbers
+    group by num
+    having count(num)=1
+)   as unique_numbers //need to put this table a name, else getting error.
