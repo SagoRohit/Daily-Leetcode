@@ -166,3 +166,9 @@ from
     group by num
     having count(num)=1
 )   as unique_numbers //need to put this table a name, else getting error.
+
+1729.
+select user_id, count(follower_id) as followers_count
+from followers
+group by user_id
+order by user_id asc
