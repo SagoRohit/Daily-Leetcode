@@ -172,3 +172,18 @@ select user_id, count(follower_id) as followers_count
 from followers
 group by user_id
 order by user_id asc
+
+1731.
+select e1.employee_id, e1.name, (select count(*)
+                                from employees e3
+                                where e3.reports_to=e1.employee_id) as reports_count,
+                                (select round(avg(e4.age),0)
+                                from employees e4
+                                where e1.employee_id=e4.reports_to) as average_age
+from employees e1
+where e1.employee_id in (
+    select e3.reports_to
+    from employees e3
+    where e3.reports_to is not null
+)
+order by e1.employee_id
