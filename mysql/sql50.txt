@@ -203,3 +203,12 @@ or conditions like '% DIAB1%'  //here space matters because of string exact matc
 select sell_date, count(distinct(product)) as num_sold, group_concat(distinct product order by product asc separator ',') as products
 from activities
 group by sell_date
+
+1789.
+select employee_id, department_id
+from employee
+where primary_flag ='Y' or employee_id in 
+(select employee_id
+from employee
+group by employee_id
+having count(department_id)=1)
