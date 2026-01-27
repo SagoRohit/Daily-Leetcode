@@ -187,3 +187,19 @@ where e1.employee_id in (
     where e3.reports_to is not null
 )
 order by e1.employee_id
+
+1667.
+select user_id, concat(upper(left(name,1)),lower(substring(name,2))) as name
+from users
+order by user_id
+
+1527.
+select *
+from patients
+where conditions like 'DIAB1%'
+or conditions like '% DIAB1%'  //here space matters because of string exact matching 
+
+1484.
+select sell_date, count(distinct(product)) as num_sold, group_concat(distinct product order by product asc separator ',') as products
+from activities
+group by sell_date
