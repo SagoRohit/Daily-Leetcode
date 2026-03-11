@@ -35,11 +35,13 @@ public:
                 if(zeroleft==0 and oneleft==0)
                     continue;
                 int result=0;
+                // exploring 0s
                 for(int len =1 ; len<= min(zeroleft, limit); len++){
                     result = (result + t[oneleft][zeroleft-len][0])%M;
                 }
                 t[oneleft][zeroleft][1]=result;
                 result=0;
+                // exploring 1s
                 for(int len =1; len<= min(oneleft, limit); len++){
                     result = (result + t[oneleft-len][zeroleft][1]) % M;
                 }
