@@ -1,5 +1,5 @@
 select name, population, area
-from World
-where area >= 3000000 or
-population >= 25000000
-;
+from world
+where population >= 25000000 or
+area >= 3000000 ;
+-- simply using where clause, with 2 conditional statement. nothing else
