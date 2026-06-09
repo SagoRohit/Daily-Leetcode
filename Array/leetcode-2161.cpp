@@ -31,3 +31,32 @@ public:
         return lessval;
     }
 };
+class Solution {
+public:
+    vector<int> pivotArray(vector<int>& nums, int pivot) {
+        vector<int> result(nums.size());
+        int less=0, equa =0;
+        for(int n: nums){
+            if(n<pivot){
+                less++;
+            }else if(n==pivot)
+                equa++;
+        }
+        int i = 0;
+        int j = less;
+        int k = less + equa;
+        for(int n: nums){
+            if(n<pivot){
+                result[i]=n;
+                i++;
+            }else if(n==pivot){
+                result[j]=n;
+                j++;
+            }else{
+                result[k]=n;
+                k++;
+            }
+        }
+        return result;
+    }
+};
