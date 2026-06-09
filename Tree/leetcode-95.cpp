@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include<map>
 using namespace std;
 struct TreeNode
 {
@@ -12,15 +13,21 @@ struct TreeNode
 };
 class Solution {
 public:
+    map<pair<int, int>, vector<TreeNode*>> mp; // map structure for memoization
+    // here pair<int, int> to capture the 'start' and 'end'. and vector<TreeNode*> is the corresponding 
+    // ans for a particular {start, end} pair.
     vector<TreeNode*> solve(int start, int end){
         // no element left
         if(start > end){
             return {NULL};
         }
         // only one element remains. so make it root and return
-        else if(start == end){
+        if(start == end){
             TreeNode* root = new TreeNode(start);
-            return {root};
+            return mp[{start, end}] = {root};
+        }
+        if(mp.find({start, end}) != mp.end()){ // checking if there is an already ans for that {start, end} pair
+            return mp[{start, end}];
         }
         // so now, from start to end, we will make everyone root once and build bsts
         vector<TreeNode*> result; // result vector which may contain all the roots of solution
@@ -40,7 +47,7 @@ public:
                 }
             }
         }
-        return result;
+        return  mp[{start, end}] = result;
     }
     vector<TreeNode*> generateTrees(int n) {
         return solve(1,n);
