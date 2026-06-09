@@ -9,7 +9,7 @@ public:
         vector<int> lessval;
         vector<int> pivotval;
         vector<int> greaterval;
-        vector<int> result;
+        //vector<int> result;
         for (int n : nums)
         {
             if (n < pivot)
@@ -19,15 +19,15 @@ public:
             else
                 greaterval.push_back(n);
         }
-        for(int i=0; i<lessval.size(); i++){
-            result.push_back(lessval[i]);
-        }
+        // for(int i=0; i<lessval.size(); i++){
+        //     result.push_back(lessval[i]);
+        // }
         for(int i=0; i<pivotval.size(); i++){
-            result.push_back(pivotval[i]);
+            lessval.push_back(pivotval[i]);
         }
         for(int i=0; i<greaterval.size(); i++){
-            result.push_back(greaterval[i]);
+            lessval.push_back(greaterval[i]);
         }
-        return result;
+        return lessval;
     }
 };
