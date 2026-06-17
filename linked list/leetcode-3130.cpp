@@ -47,3 +47,34 @@ public:
         return result;
     }
 };
+class Solution {
+public:
+    int pairSum(ListNode* head) {
+        // finding mid
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(fast!=nullptr and fast->next!=nullptr){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        ListNode* mid = slow;
+        // now reverse the 2nd half
+        ListNode* prev = NULL;
+        ListNode* nextnode = NULL;
+        while(mid!=nullptr){
+            nextnode = mid->next;
+            mid->next = prev;
+            prev = mid;
+            mid = nextnode;
+        }
+        // find max result
+        int result = 0;
+        ListNode* curr = head;
+        while(prev!=NULL){
+            result = max(result, curr->val+prev->val);
+            curr = curr->next;
+            prev = prev->next;
+        }
+        return result;
+    }
+};
