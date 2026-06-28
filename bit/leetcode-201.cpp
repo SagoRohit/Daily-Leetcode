@@ -11,6 +11,7 @@ public:
             i++; // shift count
         }
         left <<= i; // now pad zero.
+        // so this is how did this :3
         return left; 
     }
 };
