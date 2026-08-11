@@ -5,3 +5,10 @@ on p.product_id = o.product_id
 where month(o.order_date)=2
 group by p.product_id, year(o.order_date), month(o.order_date)
 having sum(o.unit) >= 100
+
+select p.product_id, sum(o.unit) as unit
+from products p join orders o
+on p.product_id = o.product_id
+where o.order_date like '2020-02-%'
+group by p.product_id
+having sum(o.unit) >=100
