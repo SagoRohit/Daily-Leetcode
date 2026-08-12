@@ -6,3 +6,12 @@ SELECT
     end as id, student
 from seat
 order by id
+
+# approach 2 : using window function
+
+select id,
+    CASE 
+        WHEN id%2=0 THEN lag(student) over(ORDER BY id) 
+        ELSE coalesce(lead(student) over(ORDER BY id), student)
+    END as student
+from seat
