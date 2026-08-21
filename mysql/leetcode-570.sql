@@ -1,9 +1,6 @@
-select e1.name
-from employee e1 join
-(
-select managerid, count(*) as report
-from employee
-group by managerid
+# Write your MySQL query statement below
+select m.name
+from employee e join employee m
+on e.managerid = m.id
+group by e.managerid
 having count(*)>=5
-) e2
-on e1.id = e2.managerid;
