@@ -7,11 +7,12 @@ order by sum(q2.weight) desc
 limit 1
 
 # 2nd approach using window function over() and cte
-with temp as (
-    select *, sum(weight) over(order by turn) as running_weight
+with base as (
+    select person_id, person_name,
+    sum(weight) over(order by turn asc) as weight
     from queue
 )
 select person_name
-from temp 
-where running_weight <= 1000
-order by running_weight desc limit 1
+from base
+where weight <=1000
+order by weight desc limit 1
