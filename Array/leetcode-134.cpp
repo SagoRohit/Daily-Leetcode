@@ -10,6 +10,9 @@ public:
             int i = start;
             bool route = true;
             int count = 0;
+            if(gas[start] < cost[start]){
+                continue;
+            }
             while(count!=n){
                 tank+= gas[i%n];
                 if(tank < cost[i%n]){
