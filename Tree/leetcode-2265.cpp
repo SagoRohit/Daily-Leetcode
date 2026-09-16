@@ -62,3 +62,26 @@ public:
         return count;
     }
 };
+
+// ========================== Optimized solution ========================
+
+class Solution {
+public:
+    int count  = 0;
+    pair<int, int> dfs(TreeNode* node){
+        if(node==nullptr)
+            return {0,0};
+        auto left = dfs(node->left);
+        auto right = dfs(node->right);
+        int sum = node->val + left.first + right.first;
+        int cnt = 1 + left.second + right.second;
+
+        if(node->val == (sum/cnt))
+            count++;
+        return {sum, cnt};
+    }
+    int averageOfSubtree(TreeNode* root) {
+        dfs(root);
+        return count;
+    }
+};
