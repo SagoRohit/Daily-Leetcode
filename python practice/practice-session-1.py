@@ -72,4 +72,10 @@ match value:
 
 s = "Python"
 print(s[::-1])
-print("".join(reversed("Python")))
+print(" ".join(reversed("Python")))
+
+# strings are immutable.
+print(s[::-1]) # reverse the string
+
+print("-".join("python"))
+s = "".join()
