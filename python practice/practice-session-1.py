@@ -78,4 +78,5 @@ print(" ".join(reversed("Python")))
 print(s[::-1]) # reverse the string
 
 print("-".join("python"))
-s = "".join()
+st = "".join(str(x) for x in [1,2,3])
+print(st)
