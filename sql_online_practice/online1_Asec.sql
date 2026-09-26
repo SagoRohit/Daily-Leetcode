@@ -202,26 +202,23 @@ END TRG_DEPT_RELOCATION;
 /
 
 
--- ------------------------------------------------------------
--- Test driver
--- ------------------------------------------------------------
 
--- Test 1: DOMESTIC move (Southlake US -> South San Francisco US)
+
 UPDATE DEPARTMENTS
 SET    LOCATION_ID = 1500
 WHERE  DEPARTMENT_ID = 60;
 
--- Test 2: REGIONAL move (Munich DE -> London GB, both Europe)
+
 UPDATE DEPARTMENTS
 SET    LOCATION_ID = 2400
 WHERE  DEPARTMENT_ID = 70;
 
--- Test 3: OVERSEAS move (Toronto CA, Americas -> Tokyo JP, Asia)
+
 UPDATE DEPARTMENTS
 SET    LOCATION_ID = 1200
 WHERE  DEPARTMENT_ID = 20;
 
--- Test 4: Assign the same location (no-op, no raise, no log row)
+
 UPDATE DEPARTMENTS
 SET    LOCATION_ID = 2400
 WHERE  DEPARTMENT_ID = 40;
