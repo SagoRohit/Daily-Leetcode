@@ -72,11 +72,41 @@ match value:
 
 s = "Python"
 print(s[::-1])
+print(s[-4:-2]) # negative slicing
 print(" ".join(reversed("Python")))
 
 # strings are immutable.
 print(s[::-1]) # reverse the string
 
 print("-".join("python"))
-st = "".join(str(x) for x in [1,2,3])
+# st = ".".join(str(x) for x in [1,2,3])
+st = ".".join(str(x) for x in [1,2,3,4])
 print(st)
+
+# concatenation
+str1 = "Hello"
+str2 = "World"
+print(str1 + str2)
+
+# formatting
+name = "sagor"
+score = 3.78
+print(f"Name: {name}, Score: {score}")
+
+# alignment and padding
+print("hi".center(6, "-"))
+print("hi".rjust(6, "="))
+print("hi".ljust(6))
+print("hi".zfill(6))
+
+s = "one one one"
+print(s.replace("one", "two", 2))
+# print(s)
+
+# split
+print("a,b,c".split(","))
+print("a,b,c,d".rsplit(",",2))
+
+print(str1.find("ll"))
+print(str1.count('H'))
+print(str1.endswith('Hello'))
